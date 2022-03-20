@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
+* {
+    font-family: "Lato", sans-serif;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+}
+
+body {
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    padding: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#err {
+    opacity: 0;
+    position: absolute;
+    color: white;
+    background: rgb(255, 119, 119);
+    width: calc(100% - 40px);
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    transition: 1s;
+    z-index: 3;
+}
+
+#err key {
+    color: rgb(255, 119, 119);
+    background: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: larger;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgb(255, 99, 71);
+    border-radius: 3px;
+}
+
+#debugData {
+    display: none;
+    position: absolute;
+    height: calc(99% - 64px);
+    width: 33%;
+    padding: 32px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    font-size: 90%;
+    z-index: 3;
+}
+
+#debugData ul {
+    margin-left: 40px;
+}
+
+#debugData li {
+    margin-bottom: 10px;
+}
+
+#notesContent {
+    display: none;
+    height: calc(99%);
+    padding-right: 16px;
+    overflow-y: scroll;
+}
+
+#notesContent::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px grey;
+    border-radius: 10px;
+}
+
+#notesContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+#notesContent::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #d38312, #a83279);
+    border-radius: 10px;
+}
+
+#notesTag {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#notesTag:hover {
+    color: #696969
+}
+
+
+/*FIXME???*/
+
+#healthBar {
+    height: calc(1em + 1px);
+    max-width: 100vh;
+    padding: 8px;
+    position: absolute;
+    background: rgba(0, 210, 15, 0.9);
+    color: white;
+    font-size: 1em;
+    border: 1px solid rgb(100, 100, 100);
+    border-radius: 15px;
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#healthBarContent {
+    position: absolute;
+    top: calc(25% - 2px);
+}
+
+
+/*END FIXME???*/
+
+#prompt {
+    opacity: 0;
+    position: absolute;
+    color: white;
+    background: rgba(25, 25, 112, 0.85);
+    width: 28%;
+    padding: 20px;
+    left: calc(72% - 40px);
+    font-size: large;
+    font-weight: bold;
+    transition: 1s;
+    z-index: 1;
+}
+
+#prompt key {
+    color: rgb(255, 99, 71);
+    background: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: larger;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgb(255, 99, 71);
+    border-radius: 3px;
+}
+
+#chatBox {
+    opacity: 0;
+    user-select: none;
+    position: absolute;
+    color: white;
+    background: rgba(25, 25, 112, .75);
+    width: 50%;
+    left: calc(25% - 20px);
+    right: calc(25% - 20px);
+    bottom: 0;
+    padding: 20px;
+    margin: auto;
+    font-weight: 500;
+    transition: 0.25s;
+    z-index: 1;
+}
+
+#chatBox #pfp {
+    width: 20%;
+    -webkit-user-drag: none;
+}
+
+#chatBox #chatContent {
+    position: absolute;
+    left: calc(20% + 24px);
+    top: 20px
+}
+
+#chatBox #chatInput {
+    margin-top: 32px;
+    border: 3px solid rgb(255, 99, 71);
+    border-radius: 28px;
+    cursor: auto;
+    padding: 10px;
+    width: calc(100% - 20px);
+    font-size: medium;
+    transition: .5s;
+}
+
+#chatBox #chatInput:focus {
+    border: 3px solid rgb(207, 81, 58);
+    outline: none;
+}
+
+#load_modal {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    position: absolute;
+    align-items: center;
+    animation: bg 10s ease infinite;
+}
+
+#invent {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    padding: 1vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 2;
+    justify-content: center;
+}
+
+#invent #content {
+    background: rgba(0, 0, 0, .75);
+    height: 75%;
+    width: 75%;
+    align-self: center;
+    padding: 3%;
+    box-shadow: 2px 2px 40px rgba(119, 119, 119, 0.5);
+    color: white;
+    user-select: none;
+}
+
+#invent #content #sns {
+    width: 25vw;
+    float: right;
+    height: 50%;
+}
+
+#invent #content #select {
+    float: right;
+    box-shadow: .5px .5px 10px rgba(119, 119, 119, 0.5);
+    padding: 16px;
+    background: black;
+    opacity: .75;
+    width: 100%;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#invent #content #select>a {
+    font-size: calc(25vw/24);
+    margin: 0 8px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+#invent #content #select>a:hover {
+    color: lightgray;
+}
+
+#invent #content #stats {
+    float: right;
+    box-shadow: .5px .5px 10px rgba(119, 119, 119, 0.5);
+    padding: 16px;
+    background: black;
+    opacity: .75;
+    width: 100%;
+    height: 100%;
+}
+
+#invent #content #stats #stats_type {
+    float: right;
+}
+
+#invent #content #stats table {
+    width: 100%;
+}
+
+#invent #content #stats .stats_data {
+    float: right;
+}
+
+#invent #content #list {
+    box-shadow: .5px .5px 10px rgba(119, 119, 119, 0.5);
+    width: 50%;
+    height: calc(100% - 128px);
+    background: black;
+    padding: 16px;
+    opacity: .75;
+    overflow-y: scroll;
+    border-radius: 8px;
+}
+
+#invent #content #list .item {
+    padding: 16px;
+    border: 1px solid rgb(150, 150, 150);
+    cursor: pointer;
+}
+
+#invent #content #list .item * {
+    cursor: pointer;
+}
+
+#invent #content #list p {
+    font-size: 1.75vh;
+}
+
+#invent #content #list::-webkit-scrollbar-track {
+    box-shadow: transparent;
+    border-radius: 8px;
+}
+
+#invent #content #list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#invent #content #list::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 8px;
+}
+
+#invent #content #list::-webkit-scrollbar-thumb:hover {
+    background: rgb(200, 200, 200);
+}
+
+#invent #content #list .selected {
+    background-color: gray;
+}
+
+#invent #content #list .item:hover {
+    background-color: rgb(100, 100, 100);
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes bg {
+    0% {
+        background: gray;
+    }
+    50% {
+        background: rgb(184, 184, 184);
+    }
+    100% {
+        background: gray;
+    }
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Loading...</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+
+    <!--The object which contains/describes the game-->
+    <script src="./scripts/Game.js"></script>
+    <!--Could be used later to add sound effects/background music-->
+    <script src="./scripts/Sound.js"></script>
+    <!--Applys the movement of the player-->
+    <script src="./scripts/applyMovement.js"></script>
+    <!--Checks to see if two objects are touching-->
+    <script src="./scripts/touching.js"></script>
+    <!--Generates new chunks-->
+    <script src="./scripts/generateChunk.js"></script>
+    <!--Renders the generated chunks-->
+    <script src="./scripts/renderChunk.js"></script>
+    <!--The JS for the debug menu-->
+    <script src="./scripts/debug.js"></script>
+    <!--The script which chooses which items should be generated-->
+    <script src="./scripts/chooseItem.js"></script>
+    <!--Returns the "items" json list-->
+    <script src="./scripts/getItemsData.js"></script>
+    <!--Applys the behaviours of the NPCs-->
+    <script src="./scripts/applyBehaviours.js"></script>
+    <!--The basic AI which moves the objects-->
+    <script src="./scripts/AI.js"></script>
+    <!--Contains the function that issues prompts-->
+    <script src="./scripts/prompt.js"></script>
+    <!--Contains the function that opens, closes and returns the response of the chat box-->
+    <script src="./scripts/ChatBox.js"></script>
+    <!--Script which loads entities-->
+    <script src="./scripts/loader.js" id="script_loader"></script>
+    <!--Loads the inventory-->
+    <script src="./scripts/loadInvent.js"></script>
+    <!--Functions which control styling-->
+    <script src="./scripts/style.js"></script>
+    <!--Helper functions-->
+    <script src="./scripts/helper.js"></script>
+</head>
+
+<body id="b">
+    <div id="load_modal">
+        <a title="asdfas, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Loader.gif"><img width="300" alt="Loader" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Loader.gif/512px-Loader.gif"></a>
+    </div>
+    <div id="err"></div>
+    <div style="display: none;" id="healthBarBack">
+        <p id="healthBar"><span id="healthBarContent">Health: <span id="health">0</span>%</span>
+        </p>
+    </div>
+    <div id="invent">
+        <div id="content">
+            <h1>Equipment</h1>
+            <br />
+            <hr />
+            <h2 style="padding-top: 3px;">Select item to equip</h2>
+            <div id="sns">
+                <div id="select">
+                    <a id="effetcs">Effects</a>
+                    <a id="weapons">Weapons</a>
+                    <a id="armour">Armour</a>
+                    <a id="misc">Miscellaneous</a>
+                </div>
+                <div id="stats">
+                    <h3 id="stats_name"></h3>
+                    <p>Type<span id="stats_type">Magic</span></p>
+                    <br />
+                    <hr />
+                    <br />
+                    <table>
+                        <tr>
+                            <td>Damage</td>
+                            <td class="stats_data" id="damage">10 HP</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div id="list">
+                <div class="item selected">
+                    <h3>Name</h3>
+                    <p>Short description...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="debugData">
+        <div id="mainContent">
+            <p id="debugData.error" style="display: none;">An error occured while fetching debug data</p>
+            <p>Title: <span id="title">Error while getting</span></p>
+            <p>FPS: <span id="fps">Loading...</span></p>
+            <p>Start Time: <span id="start">0</span></p>
+            <p>Frame calls (this second): <span id="fcts">0</span></p>
+            <br/>
+            <p>Platform: <span id="platform">Error while getting</span></p>
+            <p>Browser: <span id="browser">Error while getting</span></p>
+            <p>Src: <span id="src">Error while getting</span></p>
+            <p>Wi-fi: <span id="wifi">Error while getting</span></p>
+            <p>Language: <span id="lan">Error while getting</span></p>
+            <p>Display: <span id="display">Error while getting</span></p>
+            <br />
+            <p>Chunk: <span id="chunk">0,0</span></p>
+            <p>Mapped Chunks: <span id="mappedChunks">Error while getting</span></p>
+            <p>Map size: <span id="mapSize">0 KB</span></p>
+            <p>Skip Components: <span id="skipComponents">Error while getting</span></p>
+            <br/>
+            <p>X: <span id="x">0</span></p>
+            <p>Y: <span id="y">0</span></p>
+            <p>Player Image: <span id="playerImage">Error while getting</span></p>
+            <br />
+            <p>Components: <span id="components">Error while getting</span></p>
+            <p>Max in Chunk: <span id="mic">Error while getting</span></p>
+            <br />
+            <p>Game Mode: <span id="gameMode">default</span></p>
+            <br />
+        </div>
+        <p><span id="notesTag" onclick="showNotes()">Notes</span></p>
+        <div id="notesContent">
+            <!--
+                Formatting (in this order):
+                    e - An unfixed bug
+                    b - how to fix a bug
+                    w - A warning, this is just a heads up, and will not be fixed (it might not even be a bug)
+                    a - multiple of the above
+                    f - a feature that should be worked on
+                    p - a bug that was fixed in code
+                    c - custom, accompanied with a description
+            -->
+            <br />
+            <ul>
+                <li>#w02: If map size is larger than ~1MB performance issues are probable</li>
+                <li>#w03: Chunk generation is dependant on screen size. this means that playing the same map on a different sized screen could potentially cause issues.</li>
+                <li>#w04: Game is best to play at 50+ FPS</li>
+                <li>#f01: Compose and implement some music</li>
+                <li>#f02: Create multiple types of NPCs, and give them textures</li>
+                <li>#f03: Perhaps a new movement system?</li>
+                <li>#f04: Add biomes/an underground/different dimensions</li>
+                <li>#f05: Develop and economic system (i.e. money, trading, ect.)</li>
+                <li>#f06: Add a multiplayer mode. Playing online, and then maybe later a split-screen mode</li>
+                <li>#f07: Add support for otehr devices (specifically mobile), a downloadable version, and perhaps console support?</li>
+                <li>#p01: If an NPC leaves a chunk that had not been previously mapped/rendered, then the talk feature would temporarily disable itself. Related to id generation when generating a new chunk.</li>
+                <li>#p02: If FPS count is too low (i.e. if it is lower than ~45) glitches in movement will occur. Movement is independant from FPS</li>
+            </ul>
+        </div>
+    </div>
+    <div id="prompt"></div>
+    <div id="post-gameArea"></div>
+    <div id="chatBox"><img src="./default.jpg" id="pfp">
+        <div id="chatContent">
+            <h2 id="chat_name">Name</h2>
+            <p id="chat_content" style="margin-top: 10px;">Sorry, but I'm not sure what to say! I think I might be glitching! Please report this bug as soon as possible. Thanks!</p>
+        </div>
+        <input id="chatInput" onfocusin="enlarge()" onfocusout="shrink()" value="">
+    </div>
+    <!--The main script that kicks off the other processes-->
+    <script src="script.js" async defer></script>
+</body>
+
+</html>

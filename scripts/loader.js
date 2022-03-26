@@ -2,7 +2,7 @@ window.onload = script_loads()
 
 function script_loads() {
     var entities = [
-        "blah"
+        "merchant"
     ]
 
     for (var x in entities) {

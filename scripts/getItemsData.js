@@ -1,4 +1,22 @@
 function getItemsData() {
+    window.allItems = {
+        magic_dust: {
+            name: "Magic Dust",
+            descript: "Just some dust... But with magic!",
+            type: "Miscellaneous",
+            props: {
+                Magic: {
+                    val: 100,
+                    unit: "mp"
+                },
+                Protection: {
+                    val: 1,
+                    rep: "HP"
+                }
+            }
+        }
+    }
+
     function getItemsData_chunkChecker(thisComp, newChunkID, src, x, y) {
         if (chunks[newChunkID] == undefined) {
             window.chunks[newChunkID] = []
@@ -51,7 +69,7 @@ function getItemsData() {
     }
 
     var entities = {
-        blah: new Game_Blah()
+        merchant: new Game_Merchant()
     }
 
     return {
@@ -59,28 +77,28 @@ function getItemsData() {
             index: [],
             totalChances: 0
         },
-        "blah": {
-            id: "game_blah",
+        "merchant": {
+            id: "Game_Merchant",
             onload: function(name, xVal, yVal) {
-                game.newRectComponent(name, 50, 50, "yellow", xVal, yVal, getItemsData().blah.speed, 1, { draw: this.draw })
+                game.newImageComponent(name, 85, 85, "./assets/Merchant.png", xVal, yVal, getItemsData().merchant.speed, 1, { draw: this.draw })
             },
             onintersect: function(thisComp) {
 
             },
-            oninrange: entities.blah.oninrange,
-            onoutrange: entities.blah.onoutrange,
+            oninrange: entities.merchant.oninrange,
+            onoutrange: entities.merchant.onoutrange,
             draw: function(thisComp) {
                 if (typeof thisComp == "undefined") return
 
                 thisComp.ai.main()
 
                 var key = keyFromVal(game.components, thisComp)
-                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().blah.onload(key, thisComp.x, thisComp.y)
+                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().merchant.onload(key, thisComp.x, thisComp.y)
 
-                getItemsData_touching(thisComp, getItemsData().blah)
+                getItemsData_touching(thisComp, getItemsData().merchant)
             },
-            speed: 3,
-            rates: 5
+            speed: entities.merchant.speed,
+            rates: entities.merchant.rates
         },
         "no2": {
             id: "game_no2",

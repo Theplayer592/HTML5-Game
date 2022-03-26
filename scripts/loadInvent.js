@@ -1,6 +1,6 @@
 function loadInvent() {
     if (window.inventList == undefined) window.inventList = []
-    document.getElementById("list").innerHTML = ""
+    document.getElementById("list").innerHTML = window.inventList.length > 0 ? "" : "<h3 style='text-align: center'>You have no equipabble items</h3>"
     for (var x in window.inventList) {
         var y = window.inventList[x]
         document.getElementById("list").innerHTML += `

@@ -51,7 +51,7 @@ loaded = function() {
         }
     }
 
-    window.gameMode = "default"
+    window.gameMode = "debug" //Set to "default" normally, but during dev, set as debug
     window.reachBoxSize = 70
     window.blockKeys = false
     window.inventOpen = false;
@@ -63,7 +63,9 @@ loaded = function() {
 
     window.spareData = {}
     window.playerData = {
-        invent: {}
+        invent: {},
+        equipped: {},
+        gold: 10
     }
 
     window.chatBox = new ChatBox()

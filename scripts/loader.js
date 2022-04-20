@@ -2,7 +2,8 @@ window.onload = script_loads()
 
 function script_loads() {
     var entities = [
-        "merchant"
+        "merchant",
+        "tree"
     ]
 
     for (var x in entities) {
@@ -18,7 +19,7 @@ function callLoad() {
     setTimeout(() => {
         try {
             loaded()
-            setTimeout(() => document.getElementById("load_modal").style.display = "none", 15)
+            setTimeout(() => document.getElementById("load_modal").style.display = "none", 500)
         } catch (e) {
             callLoad()
             document.getElementById("load_modal").style.display = "flex"

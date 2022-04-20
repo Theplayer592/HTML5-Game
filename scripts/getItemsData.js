@@ -14,6 +14,17 @@ function getItemsData() {
                     rep: "HP"
                 }
             }
+        },
+        wood: {
+            name: "Wood",
+            descript: "Good wood",
+            type: "Miscellaneous",
+            props: {
+                Damage: {
+                    val: 1,
+                    rep: "HP"
+                }
+            }
         }
     }
 
@@ -68,8 +79,20 @@ function getItemsData() {
         return indexList
     }
 
+    function getItemsData_draw(thisComp) {
+        if (typeof thisComp == "undefined") return
+
+        thisComp.ai.main()
+
+        var key = keyFromVal(game.components, thisComp)
+        chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().merchant.onload(key, thisComp.x, thisComp.y)
+
+        getItemsData_touching(thisComp, getItemsData().merchant)
+    }
+
     var entities = {
-        merchant: new Game_Merchant()
+        merchant: new Game_Merchant(),
+        tree: new Game_Tree()
     }
 
     return {
@@ -77,6 +100,20 @@ function getItemsData() {
             index: [],
             totalChances: 0
         },
+        "tree": {
+            id: "Game_Tree",
+            onload: function(name, xVal, yVal) {
+                game.newImageComponent(name, 85, 85, "./assets/tree.svg", xVal, yVal, getItemsData().tree.speed, getItemsData().tree.health, { draw: this.draw })
+                game.components[name].ai.active = false
+            },
+            onintersect: function(thisComp) {},
+            oninrange: entities.tree.oninrange,
+            onoutrange: entities.tree.onoutrange,
+            draw: getItemsData_draw,
+            speed: entities.tree.speed,
+            rates: entities.tree.rates
+        }
+        /*
         "merchant": {
             id: "Game_Merchant",
             onload: function(name, xVal, yVal) {
@@ -87,16 +124,7 @@ function getItemsData() {
             },
             oninrange: entities.merchant.oninrange,
             onoutrange: entities.merchant.onoutrange,
-            draw: function(thisComp) {
-                if (typeof thisComp == "undefined") return
-
-                thisComp.ai.main()
-
-                var key = keyFromVal(game.components, thisComp)
-                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().merchant.onload(key, thisComp.x, thisComp.y)
-
-                getItemsData_touching(thisComp, getItemsData().merchant)
-            },
+            draw: getItemsData_draw,
             speed: entities.merchant.speed,
             rates: entities.merchant.rates
         },
@@ -114,18 +142,10 @@ function getItemsData() {
             onoutrange: function(thisComp, key) {
 
             },
-            draw: function(thisComp) {
-                if (typeof thisComp == "undefined") return
-
-                thisComp.ai.main()
-
-                var key = keyFromVal(game.components, thisComp)
-                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().no2.onload(key, thisComp.x, thisComp.y)
-
-                getItemsData_touching(thisComp, getItemsData().no2)
-            },
+            draw: getItemsData_draw,
             speed: 3,
             rates: 5
         }
+        */
     }
 }

@@ -211,6 +211,7 @@ canvas {
     position: absolute;
     align-items: center;
     animation: bg 10s ease infinite;
+    z-index: 3;
 }
 
 #invent {
@@ -298,9 +299,13 @@ canvas {
     border-radius: 8px;
 }
 
-#invent #content #list .item {
+#invent #content #list .invent_item {
     padding: 16px;
     border: 1px solid rgb(150, 150, 150);
+    cursor: pointer;
+}
+
+#invent #content #list .invent_item>* {
     cursor: pointer;
 }
 

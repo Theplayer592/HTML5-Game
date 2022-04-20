@@ -11,7 +11,10 @@ class Game_Merchant {
                             window.chatBox._callback = function(v) {
                                 switch (v) {
                                     case "1":
-                                        chatBox.setMessage("Ok, well that costs 10 gold peices")
+                                        chatBox.setMessage("Ok, well that costs 10 gold peices. [y = pay, n = reject]")
+                                        window.chatBox._callback = function(v) {
+                                            addToInvent(window.allItems.wood)
+                                        }
                                         break;
                                     default:
                                         window.chatBox.setMessage("Sorry, but I don't sell that. However, I do sell... [Press enter to continue]")

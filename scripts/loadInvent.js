@@ -1,10 +1,11 @@
 function loadInvent() {
     if (window.inventList == undefined) window.inventList = []
+    setTimeout(() => document.getElementById("gold_quant").innerText = window.playerData.gold || 0, 25)
     document.getElementById("list").innerHTML = window.inventList.length > 0 ? "" : "<h3 style='text-align: center'>You have no equipabble items</h3>"
     for (var x in window.inventList) {
         var y = window.inventList[x]
         document.getElementById("list").innerHTML += `
-        <div class="item" game-properties='${JSON.stringify(y.props)}'>
+        <div class="invent_item" onclick="handleInvent(this)" item-data='${JSON.stringify(y)}'>
             <h3>${y.name}</h3>
             <p>${y.descript}</p>
         </div>

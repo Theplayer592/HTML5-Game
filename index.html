@@ -39,6 +39,8 @@
     <script src="./scripts/loader.js" id="script_loader"></script>
     <!--Loads the inventory-->
     <script src="./scripts/loadInvent.js"></script>
+    <!--Handles inventory actions-->
+    <script src="./scripts/handleInvent.js"></script>
     <!--Functions which control styling-->
     <script src="./scripts/style.js"></script>
     <!--Helper functions-->
@@ -57,7 +59,7 @@
     <div id="invent">
         <div id="content">
             <h1>Equipment</h1>
-            <!--<h2 style="float: right;">Gold: <span id="gold_quant">10</span></h2>-->
+            <h2 style="float: right; padding-left: 16px;">Gold: <span id="gold_quant">10</span></h2>
             <br />
             <hr />
             <h2 style="padding-top: 3px;">Select item to equip</h2>
@@ -70,14 +72,14 @@
                 </div>
                 <div id="stats">
                     <h3 id="stats_name"></h3>
-                    <p>Type<span id="stats_type">Placeholder</span></p>
+                    <p>Type<span id="stats_type">???</span></p>
                     <br />
                     <hr />
                     <br />
                     <table>
                         <tr>
-                            <td>Placeholder Lable</td>
-                            <td class="stats_data" id="damage">Placeholder HP</td>
+                            <td>Damage</td>
+                            <td class="stats_data" id="stats_damage">0 HP</td>
                         </tr>
                     </table>
                 </div>

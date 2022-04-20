@@ -149,6 +149,8 @@ loaded = function() {
         if (window.blockKeys) return
 
         if (e.type == "keydown" && e.key == "F2") {
+            //Clear key array, to stop bug where user cannot stop moving
+            map = []
             switch (Bool(sessionStorage.getItem("visibleReachBox"))) {
                 case false:
                     game.components.reachBox.color = "rgba(0, 255, 0, 0.5)"

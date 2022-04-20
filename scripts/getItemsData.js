@@ -85,7 +85,7 @@ function getItemsData() {
         thisComp.ai.main()
 
         var key = keyFromVal(game.components, thisComp)
-        chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().merchant.onload(key, thisComp.x, thisComp.y)
+        chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData()[entityName].onload(key, thisComp.x, thisComp.y)
 
         getItemsData_touching(thisComp, getItemsData().merchant)
     }
@@ -109,7 +109,16 @@ function getItemsData() {
             onintersect: function(thisComp) {},
             oninrange: entities.tree.oninrange,
             onoutrange: entities.tree.onoutrange,
-            draw: getItemsData_draw,
+            draw: function(thisComp) {
+                if (typeof thisComp == "undefined") return
+
+                thisComp.ai.main()
+
+                var key = keyFromVal(game.components, thisComp)
+                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().tree.onload(key, thisComp.x, thisComp.y)
+
+                getItemsData_touching(thisComp, getItemsData().merchant)
+            },
             speed: entities.tree.speed,
             rates: entities.tree.rates
         }

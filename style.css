@@ -100,8 +100,30 @@ canvas {
     color: #696969
 }
 
+#inrangeHealths {
+    display: flex;
+    position: absolute;
+    height: calc(99% - 64px);
+    width: 20%;
+    padding: 32px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 90%;
+    z-index: 2;
+}
 
-/*FIXME???*/
+.irh {
+    width: 15vw;
+    background-color: lightgray;
+    height: 10px;
+}
+
+.irh div {
+    background-color: green;
+    height: 100%;
+    width: 50%;
+}
 
 #healthBar {
     height: calc(1em + 1px);

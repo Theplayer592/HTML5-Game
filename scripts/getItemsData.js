@@ -120,7 +120,8 @@ function getItemsData() {
                 getItemsData_touching(thisComp, getItemsData().merchant)
             },
             speed: entities.tree.speed,
-            rates: entities.tree.rates
+            rates: entities.tree.rates,
+            health: entities.tree.health
         }
         /*
         "merchant": {

@@ -143,6 +143,7 @@ class Game {
         if (this.components.player.health / 2 < 7.5) {
             document.getElementById("healthBar").style.width = "6.5%"
         }
+        updateIRH()
         if (this.run) requestAnimationFrame(updateGameArea)
     }
 }

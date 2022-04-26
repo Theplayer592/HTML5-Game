@@ -177,8 +177,10 @@ loaded = function() {
         }
         if (e.type == "keydown" && e.key == "e") {
             if (window.inventOpen) {
+                game.play() //Restart the game
                 document.getElementById("invent").style.display = "none"
             } else {
+                game.pause() //Pause the game
                 document.getElementById("invent").style.display = "flex"
             }
             inventOpen = !inventOpen

@@ -82,14 +82,14 @@ loaded = function() {
     window.game = new Game("New Game")
     game.init(window.innerHeight / 1.05, window.innerHeight / 1.05, "#699969", document.getElementById("post-gameArea"))
     game.canvas.style.backgroundSize = `${window.innerWidth / 1.05}px ${window.innerHeight / 1.05}px`
-    console.log(game)
+    if (gameMode == "debug") console.log(game)
 
     game.newRectComponent("canvasSize", window.innerHeight / 1.05, window.innerHeight / 1.05, "transparent", 0, 0)
     game.newImageComponent("player", 75, 75, "./assets/player-front.png", (window.innerHeight / 1.05) / 2, (window.innerHeight / 1.05) / 2, 4, 100)
 
     const player = game.components.player
 
-    console.log(window)
+    if (gameMode == "debug") console.log(window)
 
     window.chunks = { "0,0": [] }
     window.chunkX = 0

@@ -21,3 +21,11 @@ function getObjectSize(obj) {
     else if (chunkBytes < 1073741824) return (chunkBytes / 1048576).toFixed(3) + " MB";
     else return (chunkBytes / 1073741824).toFixed(3) + " GB";
 }
+
+function getChunkIndex() {
+    var index = []
+    for (let i = 0; i < chunks[currentChunk].length; i++) {
+        index.push(chunks[currentChunk][i].id)
+    }
+    return index
+}

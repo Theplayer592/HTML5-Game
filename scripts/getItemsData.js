@@ -40,19 +40,14 @@ function getItemsData() {
             id: id,
             descriptor: src.id,
             functions: {
-                onload: () => src.onload(id, x, y),
+                onload: () => src.onload(id, x, y, thisComp.health),
                 onintersect: () => src.onintersect(game.components[id]),
                 oninrange: () => src.oninrange(game.components[id], id),
                 onoutrange: () => src.onoutrange(game.components[id], id)
             }
         })
 
-        var index = []
-        for (let i = 0; i < chunks[currentChunk].length; i++) {
-            index.push(chunks[currentChunk][i].id)
-        }
-
-        chunks[currentChunk].splice(index.indexOf(keyFromVal(game.components, thisComp)), 1)
+        chunks[currentChunk].splice(getChunkIndex().indexOf(keyFromVal(game.components, thisComp)), 1)
         delete game.components[keyFromVal(game.components, thisComp)]
     }
 
@@ -85,7 +80,7 @@ function getItemsData() {
         thisComp.ai.main()
 
         var key = keyFromVal(game.components, thisComp)
-        chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData()[entityName].onload(key, thisComp.x, thisComp.y)
+        chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData()[entityName].onload(key, thisComp.x, thisComp.y, thisComp.health)
 
         getItemsData_touching(thisComp, getItemsData().merchant)
     }
@@ -102,8 +97,8 @@ function getItemsData() {
         },
         "tree": {
             id: "Game_Tree",
-            onload: function(name, xVal, yVal) {
-                game.newImageComponent(name, 85, 85, "./assets/tree.svg", xVal, yVal, getItemsData().tree.speed, getItemsData().tree.health, { draw: this.draw })
+            onload: function(name, xVal, yVal, healthArg = getItemsData().tree.health) {
+                game.newImageComponent(name, 85, 85, "./assets/tree.svg", xVal, yVal, getItemsData().tree.speed, healthArg, { draw: this.draw })
                 game.components[name].ai.active = false
             },
             onintersect: function(thisComp) {},
@@ -115,7 +110,7 @@ function getItemsData() {
                 thisComp.ai.main()
 
                 var key = keyFromVal(game.components, thisComp)
-                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().tree.onload(key, thisComp.x, thisComp.y)
+                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().tree.onload(key, thisComp.x, thisComp.y, thisComp.health)
 
                 getItemsData_touching(thisComp, getItemsData().tree)
             },

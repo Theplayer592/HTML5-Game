@@ -117,7 +117,7 @@ function getItemsData() {
                 var key = keyFromVal(game.components, thisComp)
                 chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().tree.onload(key, thisComp.x, thisComp.y)
 
-                getItemsData_touching(thisComp, getItemsData().merchant)
+                getItemsData_touching(thisComp, getItemsData().tree)
             },
             speed: entities.tree.speed,
             rates: entities.tree.rates,

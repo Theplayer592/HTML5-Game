@@ -4,7 +4,7 @@ window.inrangeHealths = []
 function addIRH(name, percent) {
     window.inrangeHealths.push({
         name: name,
-        percent: percent
+        percent: Number(percent)
     })
 }
 
@@ -19,6 +19,7 @@ function updateIRH() {
                 <div style="width: ${percent}%"></div>
             </div>
         </div>
+        <br /> <br />
         `
     });
     window.inrangeHealths = []

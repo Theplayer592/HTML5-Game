@@ -1,5 +1,6 @@
 function touching() {
     function touching_chunkChecker(chunkName, x, y, operator) {
+      console.log(chunks)
         if (!chunks[chunkName]) {
             chunks[chunkName] = []
             generateChunk(chunks[chunkName], chunkName)

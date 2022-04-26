@@ -7,7 +7,10 @@ class Game_Tree {
                 val: "q",
                 f: () => {
                     //Add a cooldown, because otherwise this will decrease health by 50 in about a second
-                    thisComp.health -= 1
+                    /*if(!this.blocker)*/ thisComp.health -= 1
+                  console.log(thisComp)
+                    //this.blocker = true
+                  //setTimeout(() => this.blocker = false, 1)
                 }
             })
         }

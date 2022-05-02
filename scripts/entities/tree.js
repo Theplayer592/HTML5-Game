@@ -14,15 +14,16 @@ class Game_Tree {
                         chunks[currentChunk].splice(getChunkIndex().indexOf(keyFromVal(game.components, thisComp)), 1)
                         delete window.game.components[keyFromVal(game.components, thisComp)]
                     }
-                    window.other_onkeydown.checks = []
-                    this.checkAdded = false
+                    //window.other_onkeydown.checks = []
+                    //this.checkAdded = false
                 }
-            }) - 1
+            })
+            this.checkIndex = window.other_onkeydown.checks.length - 1
             this.checkAdded = true
         }
         this.onoutrange = function(thisComp, key) {
             if (thisComp == undefined) return
-                //if (this.checkAdded) window.other_onkeydown.checks = []
+            if (this.checkAdded) window.other_onkeydown.checks.splice(this.checkIndex, 1)
             this.checkAdded = false
         }
         this.speed = 0

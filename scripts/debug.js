@@ -5,7 +5,7 @@ function debug() {
         document.getElementById("fcts").innerHTML = window.fpsCounter.count
         if (navigator.userAgentData) document.getElementById("platform").innerHTML = navigator.userAgentData.platform
         document.getElementById("browser").innerHTML = navigator.whichBrowser
-        if (location.href.length > Math.floor(window.innerWidth / 26)) { document.getElementById("src").innerHTML = location.href.substring(0, Math.floor(window.innerWidth / 26)) + "..." } else { document.getElementById("src").innerHTML = JSON.stringify(Object.keys(game.components)) }
+        if (location.href.length > Math.floor(window.innerWidth / 26)) { document.getElementById("src").innerHTML = location.href.substring(0, Math.floor(window.innerWidth / 26)) + "..." } else { document.getElementById("src").innerHTML = location.href }
         document.getElementById("wifi").innerHTML = navigator.connection.effectiveType
         document.getElementById("lan").innerHTML = navigator.language
         document.getElementById("display").innerHTML = `${game.canvas.style.width} x ${game.canvas.style.height}`

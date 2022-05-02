@@ -13,8 +13,10 @@ function loadInvent() {
     }
 }
 
-function addToInvent(obj) {
-    window.inventList.push(obj)
+function addToInvent(obj, quant = 1) {
+    for (let x = 0; x < quant; x++) {
+        window.inventList.push(obj)
+    }
     loadInvent()
 }
 

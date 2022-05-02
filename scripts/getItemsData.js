@@ -1,16 +1,13 @@
 function getItemsData() {
     window.allItems = {
-        magic_dust: {
-            name: "Magic Dust",
-            descript: "Just some dust... But with magic!",
-            type: "Miscellaneous",
+        //Player_fist is not much more than a wrapper for some player stats
+        player_fist: {
+            name: "Player Fist",
+            descript: "Wrapper for default player damage/stats",
+            type: "N/A",
             props: {
-                Magic: {
-                    val: 100,
-                    unit: "mp"
-                },
-                Protection: {
-                    val: 1,
+                Damage: {
+                    val: 5,
                     rep: "HP"
                 }
             }
@@ -87,7 +84,8 @@ function getItemsData() {
 
     var entities = {
         merchant: new Game_Merchant(),
-        tree: new Game_Tree()
+        tree: new Game_Tree(),
+        cave: new Game_Cave()
     }
 
     return {
@@ -117,6 +115,29 @@ function getItemsData() {
             speed: entities.tree.speed,
             rates: entities.tree.rates,
             health: entities.tree.health
+        },
+        "cave": {
+            id: "Game_Cave",
+            onload: function(name, xVal, yVal, healthArg = getItemsData().cave.health) {
+                game.newImageComponent(name, 85, 85, "./assets/cave.png", xVal, yVal, getItemsData().cave.speed, healthArg, { draw: this.draw })
+                game.components[name].ai.active = false
+            },
+            onintersect: function(thisComp) {},
+            oninrange: entities.cave.oninrange,
+            onoutrange: entities.cave.onoutrange,
+            draw: function(thisComp) {
+                if (typeof thisComp == "undefined") return
+
+                thisComp.ai.main()
+
+                var key = keyFromVal(game.components, thisComp)
+                chunks[currentChunk][getItemsData_index().indexOf(keyFromVal(game.components, thisComp))].functions.onload = () => getItemsData().cave.onload(key, thisComp.x, thisComp.y, thisComp.health)
+
+                getItemsData_touching(thisComp, getItemsData().cave)
+            },
+            speed: entities.cave.speed,
+            rates: entities.cave.rates,
+            health: entities.cave.health
         }
         /*
         "merchant": {

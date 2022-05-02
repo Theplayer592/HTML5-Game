@@ -3,7 +3,8 @@ window.onload = script_loads()
 function script_loads() {
     var entities = [
         "merchant",
-        "tree"
+        "tree",
+        "cave"
     ]
 
     for (var x in entities) {
@@ -20,6 +21,9 @@ function callLoad() {
         try {
             loaded()
             setTimeout(() => document.getElementById("load_modal").style.display = "none", 500)
+
+            //Initiate player fist
+            window.playerData.equipped = window.allItems.player_fist
         } catch (e) {
             callLoad()
             document.getElementById("load_modal").style.display = "flex"

@@ -1,6 +1,6 @@
 function generateChunk(chunk, chunkID, renderChunkAfter = true) {
     game.canvas.style.background = "url('./assets/TerrainGeneration.png')"
-    var noOfItems = Math.floor(Math.random() * (Math.round(window.innerHeight / 105.05 / 2)))
+    var noOfItems = Math.floor(Math.random() * (Math.round(window.innerHeight / 100)))
     if (noOfItems < 1 && window.gameMode == "debug") getItemsData() //Load in the items, even if there is no need to, for debug purposes
     for (let i = 0; i < noOfItems; i++) {
         let chosenItem = chooseItem()

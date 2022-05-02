@@ -119,7 +119,6 @@ class Game {
 
     update() {
         window.fpsCounter.count++;
-        window.fpsCounter.fps = Math.round(window.fpsCounter.count / ((Date.now() / 1000) - window.fpsCounter.startTime))
         for (const [key, value] of Object.entries(this.components)) {
             switch (this.components[key].type) {
                 case "rect":
@@ -144,8 +143,8 @@ class Game {
             document.getElementById("healthBar").style.width = "6.5%"
         }
         if (this.run) {
-          updateIRH()
-          requestAnimationFrame(updateGameArea)
+            updateIRH()
+            requestAnimationFrame(updateGameArea)
         }
     }
 }

@@ -17,7 +17,7 @@ function debug() {
         document.getElementById("y").innerHTML = Math.round(game.components.player.y)
         document.getElementById("playerImage").innerHTML = game.components.player.imgURL
         if (JSON.stringify(Object.keys(game.components)).length > Math.floor(window.innerWidth / 28)) { document.getElementById("components").innerHTML = JSON.stringify(Object.keys(game.components)).substring(0, Math.floor(window.innerWidth / 28)) + "...]" } else { document.getElementById("components").innerHTML = JSON.stringify(Object.keys(game.components)) }
-        document.getElementById("mic").innerHTML = Math.floor(window.innerHeight / 105.05 / 2)
+        document.getElementById("mic").innerHTML = Math.round(window.innerHeight / 100)
         document.getElementById("gameMode").innerHTML = window.gameMode
     } catch (e) {
         document.getElementById("debugData.error").style.display = "block"

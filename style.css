@@ -109,13 +109,13 @@ canvas {
     background: rgba(0, 0, 0, 0.4);
     color: white;
     font-size: 90%;
-    z-index: 2;
+    z-index: 1;
 }
 
 .irh-container {
-  width: 16vw;
-  clear: both;
-  height: 15px;
+    width: 16vw;
+    clear: both;
+    height: 15px;
 }
 
 .irh {

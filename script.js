@@ -206,6 +206,7 @@ loaded = function() {
     }
 }
 
+//Load inventory
 loadInvent()
 
 if (document.body.clientHeight > document.body.clientWidth) {
